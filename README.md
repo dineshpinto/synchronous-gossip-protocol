@@ -45,4 +45,4 @@ poetry run python -m ipykernel install --user --name=synchronous-gossip-protocol
 poetry run jupyter lab
 ```
 
-Open `synchronous-gossip-protocol.ipynb` and run all cells.
+Open `synchronous_gossip.ipynb` and run all cells.

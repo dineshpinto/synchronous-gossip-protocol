@@ -33,3 +33,11 @@ jobs:
       - name: Test with unittests
         run: |
           poetry run coverage run -m unittest
+          poetry run coverage xml
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
