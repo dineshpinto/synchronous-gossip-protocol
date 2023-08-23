@@ -43,7 +43,7 @@ class NodeGenerationTest(TestCase):
 
         self.sample_nodes, self.non_sample_nodes = self.node_generator.initialize_nodes()
 
-        self.node_generator.link_nodes(
+        self.node_generator.link_nodes_to_peers(
             generator=self.node_generator.randomly_connected_nodes(
                 total_nodes=self.sample_nodes + self.non_sample_nodes,
             )

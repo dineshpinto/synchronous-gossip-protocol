@@ -80,7 +80,7 @@ class NodeGenerator:
         self.num_connected_nodes = num_connected_nodes
 
     @staticmethod
-    def fully_connected_nodes(
+    def _connect_all_nodes(
             total_nodes: list[SampleNode | NonSampleNode]
     ) -> Generator[SampleNode | NonSampleNode, list[SampleNode | NonSampleNode]]:
         """ Generate a fully connected graph """
@@ -92,7 +92,7 @@ class NodeGenerator:
             total_nodes: list,
     ) -> Generator[SampleNode | NonSampleNode, list[SampleNode | NonSampleNode]]:
         """ Generate a randomly connected graph """
-        for node, peers in self.fully_connected_nodes(total_nodes):
+        for node, peers in self._connect_all_nodes(total_nodes):
             yield node, random.sample([n for n in peers], self.num_connected_nodes)
 
     def initialize_nodes(self) -> tuple[list[SampleNode], list[NonSampleNode]]:
@@ -109,7 +109,7 @@ class NodeGenerator:
         return sample_nodes, non_sample_nodes
 
     @staticmethod
-    def link_nodes(generator: Generator):
-        """ Link the nodes to each other """
+    def link_nodes_to_peers(generator: Generator):
+        """ Link the nodes to peers """
         for node, peers in generator:
             node.peers = peers

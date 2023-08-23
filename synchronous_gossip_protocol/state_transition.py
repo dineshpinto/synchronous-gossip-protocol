@@ -19,20 +19,20 @@ class StateTransitionFunction:
         self.node_generator = node_generator
 
     @staticmethod
-    def broadcast(
+    def _add_messages_to_queue(
             node: SampleNode | NonSampleNode,
             message_queue: defaultdict
     ) -> Message | None:
         """ Broadcast the message from a node to its peers """
         message, peers = node.broadcast()
         if message is not None:
-            for p in peers:
-                message_queue[p][message] += 1
+            for peer in peers:
+                message_queue[peer][message] += 1
             return message
         return None
 
     @staticmethod
-    def update_all_nodes(message_queue: defaultdict):
+    def _update_all_nodes(message_queue: defaultdict):
         """ Update the internal state of all nodes """
         for node, messages in message_queue.items():
             node.update(messages)
@@ -53,21 +53,21 @@ class StateTransitionFunction:
 
             _messages_non_sample = []
             for node in self.non_sample_nodes:
-                msg = self.broadcast(node, message_queue)
+                msg = self._add_messages_to_queue(node, message_queue)
                 _messages_non_sample.append(msg.value if msg is not None else None)
 
             _messages_sample = []
             for node in self.sample_nodes:
-                msg = self.broadcast(node, message_queue)
+                msg = self._add_messages_to_queue(node, message_queue)
                 _messages_sample.append(msg.value if msg is not None else None)
 
             messages.append(_messages_non_sample + _messages_sample)
 
-            self.update_all_nodes(message_queue)
+            self._update_all_nodes(message_queue)
             message_queue.clear()
 
             if resample_peers_each_step:
-                self.node_generator.link_nodes(
+                self.node_generator.link_nodes_to_peers(
                     generator=self.node_generator.randomly_connected_nodes(
                         total_nodes=self.sample_nodes + self.non_sample_nodes,
                     )

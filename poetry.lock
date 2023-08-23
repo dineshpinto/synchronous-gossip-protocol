@@ -1088,6 +1088,21 @@ openapi = ["openapi-core (>=0.16.1,<0.17.0)", "ruamel-yaml"]
 test = ["hatch", "ipykernel", "jupyterlab-server[openapi]", "openapi-spec-validator (>=0.5.1,<0.7.0)", "pytest (>=7.0)", "pytest-console-scripts", "pytest-cov", "pytest-jupyter[server] (>=0.6.2)", "pytest-timeout", "requests-mock", "sphinxcontrib-spelling", "strict-rfc3339", "werkzeug"]
 
 [[package]]
+name = "jupyterlab-spellchecker"
+version = "0.8.4"
+description = "A spell checker for JupyterLab."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "jupyterlab_spellchecker-0.8.4-py3-none-any.whl", hash = "sha256:2701999d6a826e0a54a12fa41c60b9ffef220ee267e78fe20144423dbcc6d6d8"},
+    {file = "jupyterlab_spellchecker-0.8.4.tar.gz", hash = "sha256:e0722f00c795e8b5d60655ed475dd91a67fe7180c32ac891a50f38c7abc7684b"},
+]
+
+[package.dependencies]
+jupyter-server = ">=2.0.1,<3"
+jupyterlab = ">=4,<5"
+
+[[package]]
 name = "kiwisolver"
 version = "1.4.4"
 description = "A fast implementation of the Cassowary constraint solver"
@@ -2487,4 +2502,4 @@ test = ["websockets"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5386bd227332e5db1f073d69c5a4bb05aaa4415073a96e55beb556fc170b2c5c"
+content-hash = "f8794b724f97c041fefa5d5f6584ba157a27aad502af1aba325e3f48c636ad25"

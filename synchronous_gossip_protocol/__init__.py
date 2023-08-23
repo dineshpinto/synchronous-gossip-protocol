@@ -20,7 +20,7 @@ def generate_nodes_and_run_stf(
 
     sample_nodes, non_sample_nodes = node_generator.initialize_nodes()
 
-    node_generator.link_nodes(
+    node_generator.link_nodes_to_peers(
         generator=node_generator.randomly_connected_nodes(
             total_nodes=sample_nodes + non_sample_nodes,
         )
