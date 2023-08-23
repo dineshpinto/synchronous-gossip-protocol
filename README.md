@@ -5,6 +5,8 @@
 
 Python implementation of a synchronous gossip protocol. 
 
+## Schema
+
 ```mermaid
 flowchart TD
     GossipProtocolParams --> NodeGenerator;
@@ -23,6 +25,10 @@ flowchart TD
     end
 ```
 
+- Protocol library code is located in `synchronous_gossip_protocol/`
+- Theory and simulation code are in a JupyterLab Notebook `synchronous_gossip.ipynb`
+- Unittest cases are in `tests/`
+
 
 ## Installation
 
@@ -38,3 +44,5 @@ poetry run python -m ipykernel install --user --name=synchronous-gossip-protocol
 ```bash
 poetry run jupyter lab
 ```
+
+Open `synchronous-gossip-protocol.ipynb` and run all cells.
