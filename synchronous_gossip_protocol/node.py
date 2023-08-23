@@ -2,7 +2,6 @@ import random
 from collections import Counter
 from collections.abc import Generator
 from enum import Enum
-from typing import Callable
 
 
 class Message(Enum):
@@ -85,16 +84,6 @@ class NodeGenerator:
         """ Generate a fully connected graph """
         for current_node in total_nodes:
             yield current_node, NodePeerList(total_nodes, current_node)
-
-    def sparsely_connected_nodes(
-            self,
-            total_nodes: list,
-            p: float,
-            entropy: Callable = random.random
-    ) -> Generator[SampleNode | NonSampleNode, list[SampleNode | NonSampleNode]]:
-        """ Generate a sparsely connected graph """
-        for node, peers in self.fully_connected_nodes(total_nodes):
-            yield node, [n for n in peers if entropy() <= p]
 
     def randomly_connected_nodes(
             self,

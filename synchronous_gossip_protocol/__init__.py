@@ -1,7 +1,7 @@
-from .node import NodeGenerator, NodePeerList
+from .node import NodeGenerator, NodePeerList, Message
 from .state_transition import StateTransitionFunction
 
-__all__ = ["NodeGenerator", "StateTransitionFunction", "NodePeerList"]
+__all__ = ["NodeGenerator", "StateTransitionFunction", "NodePeerList", "Message"]
 
 
 def generate_nodes_and_run_stf(
