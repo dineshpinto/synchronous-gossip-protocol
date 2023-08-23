@@ -9,11 +9,11 @@ packages = [{ include = "synchronous_gossip_protocol" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-docopt = "^0.6.2"
 
 
 [tool.poetry.group.test.dependencies]
 coverage = "^7.3.0"
+coverage-badge = "^1.1.0"
 
 
 

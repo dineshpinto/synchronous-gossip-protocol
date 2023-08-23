@@ -13,6 +13,7 @@ class Message(Enum):
 
 class NonSampleNode:
     """ Class for nodes not within the sample """
+
     def __init__(self):
         self.peers: list = []
         self.stored_messages: list[Message] = []
@@ -33,11 +34,13 @@ class NonSampleNode:
 
 class SampleNode:
     """ Class for nodes within the sample """
+
     def __init__(self, msg: Message):
         self.peers: list = []
         self.msg: Message = msg
 
     def broadcast(self) -> tuple[Message, list]:
+        """ Broadcast the message to all peers """
         return self.msg, self.peers
 
     def update(self, _):

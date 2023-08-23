@@ -33,4 +33,4 @@ jobs:
       - name: Test with unittests
         run: |
           poetry run coverage run -m unittest
-          poetry run coverage xml
+          poetry run coverage-badge -o tests/coverage.svg
