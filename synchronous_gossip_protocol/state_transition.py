@@ -42,17 +42,19 @@ class StateTransitionFunction:
         for idx in range(1, time_steps + 1):
             assert not message_queue
 
-            _messages = []
+            _messages_non_sample = []
             for node in self.non_sample_nodes:
                 msg = self.broadcast(node, message_queue)
-                _messages.append(msg.value if msg is not None else None)
+                _messages_non_sample.append(msg.value if msg is not None else None)
 
+            _messages_sample = []
             for node in self.sample_nodes:
-                self.broadcast(node, message_queue)
+                msg = self.broadcast(node, message_queue)
+                _messages_sample.append(msg.value if msg is not None else None)
+
+            messages.append(_messages_non_sample + _messages_sample)
 
             self.update_all_nodes(message_queue)
             message_queue.clear()
-
-            messages.append(_messages)
 
         return messages

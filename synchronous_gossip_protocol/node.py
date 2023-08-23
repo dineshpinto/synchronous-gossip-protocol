@@ -13,8 +13,6 @@ class Message(Enum):
 
 class NonSampleNode:
     """ Class for nodes not within the sample """
-    __slots__ = ('peers', 'counter')
-
     def __init__(self):
         self.peers: list = []
         self.counter: Counter = Counter()
@@ -32,9 +30,6 @@ class NonSampleNode:
 
 class SampleNode:
     """ Class for nodes within the sample """
-
-    __slots__ = ('peers', 'msg')
-
     def __init__(self, msg: Message):
         self.peers: list = []
         self.msg: Message = msg
