@@ -72,10 +72,12 @@ class NodeGenerator:
             num_non_sample_nodes: int,
             num_honest_sample_nodes: int,
             num_adversarial_sample_nodes: int,
+            num_connected_nodes: int
     ):
         self.num_non_sample_nodes = num_non_sample_nodes
         self.num_honest_sample_nodes = num_honest_sample_nodes
         self.num_adversarial_sample_nodes = num_adversarial_sample_nodes
+        self.num_connected_nodes = num_connected_nodes
 
     @staticmethod
     def fully_connected_nodes(
@@ -88,11 +90,10 @@ class NodeGenerator:
     def randomly_connected_nodes(
             self,
             total_nodes: list,
-            num_connected_nodes: int
     ) -> Generator[SampleNode | NonSampleNode, list[SampleNode | NonSampleNode]]:
         """ Generate a randomly connected graph """
         for node, peers in self.fully_connected_nodes(total_nodes):
-            yield node, random.sample([n for n in peers], num_connected_nodes)
+            yield node, random.sample([n for n in peers], self.num_connected_nodes)
 
     def initialize_nodes(self) -> tuple[list[SampleNode], list[NonSampleNode]]:
         """ Initialize the nodes """

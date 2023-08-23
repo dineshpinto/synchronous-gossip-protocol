@@ -14,7 +14,8 @@ def generate_nodes_and_run_stf(
     node_generator = NodeGenerator(
         num_non_sample_nodes=num_non_sample_nodes,
         num_honest_sample_nodes=num_honest_sample_nodes,
-        num_adversarial_sample_nodes=num_adversarial_sample_nodes
+        num_adversarial_sample_nodes=num_adversarial_sample_nodes,
+        num_connected_nodes=num_connected_nodes
     )
 
     sample_nodes, non_sample_nodes = node_generator.initialize_nodes()
@@ -22,13 +23,13 @@ def generate_nodes_and_run_stf(
     node_generator.link_nodes(
         generator=node_generator.randomly_connected_nodes(
             total_nodes=sample_nodes + non_sample_nodes,
-            num_connected_nodes=num_connected_nodes
         )
     )
 
     state_transition_func = StateTransitionFunction(
         sample_nodes=sample_nodes,
-        non_sample_nodes=non_sample_nodes
+        non_sample_nodes=non_sample_nodes,
+        node_generator=node_generator
     )
 
     states = state_transition_func.iterate_state(time_steps)

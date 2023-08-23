@@ -1,6 +1,8 @@
 from collections import Counter, defaultdict
 
-from .node import Message, NonSampleNode, SampleNode
+from tqdm import tqdm
+
+from .node import Message, NonSampleNode, SampleNode, NodeGenerator
 
 
 class StateTransitionFunction:
@@ -9,10 +11,12 @@ class StateTransitionFunction:
     def __init__(
             self,
             sample_nodes: list[SampleNode],
-            non_sample_nodes: list[NonSampleNode]
+            non_sample_nodes: list[NonSampleNode],
+            node_generator: NodeGenerator,
     ):
         self.sample_nodes = sample_nodes
         self.non_sample_nodes = non_sample_nodes
+        self.node_generator = node_generator
 
     @staticmethod
     def broadcast(
@@ -33,13 +37,18 @@ class StateTransitionFunction:
         for node, messages in message_queue.items():
             node.update(messages)
 
-    def iterate_state(self, time_steps: int) -> list[list[int]]:
+    def iterate_state(
+            self,
+            time_steps: int,
+            resample_peers_each_step: bool = False,
+            progress_bar: bool = False
+    ) -> list[list[int]]:
         """ Iterate the state of the network in time """
         message_queue = defaultdict(Counter)
 
         messages = []
 
-        for idx in range(1, time_steps + 1):
+        for _ in tqdm(range(1, time_steps + 1), disable=not progress_bar):
             assert not message_queue
 
             _messages_non_sample = []
@@ -56,5 +65,12 @@ class StateTransitionFunction:
 
             self.update_all_nodes(message_queue)
             message_queue.clear()
+
+            if resample_peers_each_step:
+                self.node_generator.link_nodes(
+                    generator=self.node_generator.randomly_connected_nodes(
+                        total_nodes=self.sample_nodes + self.non_sample_nodes,
+                    )
+                )
 
         return messages

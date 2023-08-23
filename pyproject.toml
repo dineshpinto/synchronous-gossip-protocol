@@ -9,6 +9,7 @@ packages = [{ include = "synchronous_gossip_protocol" }]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+tqdm = "^4.66.1"
 
 
 [tool.poetry.group.test.dependencies]
