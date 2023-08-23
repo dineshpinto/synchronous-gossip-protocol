@@ -4,7 +4,7 @@ from .state_transition import StateTransitionFunction
 __all__ = ["NodeGenerator", "StateTransitionFunction", "NodePeerList"]
 
 
-def run(
+def generate_nodes_and_run_stf(
         num_non_sample_nodes: int,
         num_honest_sample_nodes: int,
         num_adversarial_sample_nodes: int,
