@@ -15,6 +15,7 @@ class NonSampleNode:
     """ Class for nodes not within the sample """
     def __init__(self):
         self.peers: list = []
+        self.stored_messages: list[Message] = []
         self.counter: Counter = Counter()
 
     def broadcast(self) -> tuple[Message | None, list]:
@@ -24,7 +25,9 @@ class NonSampleNode:
             return value, self.peers
         return None, []
 
-    def update(self, messages):
+    def update(self, messages: list[Message]):
+        """ Update the counter and storage """
+        self.stored_messages.extend(messages)
         self.counter.update(messages)
 
 
