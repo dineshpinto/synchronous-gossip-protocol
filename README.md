@@ -6,6 +6,8 @@
 
 Python implementation of a synchronous gossip protocol. 
 
+For a (blazingly fast) implementation in Rust see [dineshpinto/gossip-protocol-rs](https://github.com/dineshpinto/gossip-protocol-rs)
+
 ## Schema
 
 ```mermaid
